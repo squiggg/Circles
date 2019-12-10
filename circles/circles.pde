@@ -1,4 +1,4 @@
-final float MAX_CIRCLES = 300, SPAWN_RADIUS = 300, MIN_GREY = 0, MAX_GREY = 255, MIN_SIZE = 50, MAX_SIZE = 75, MIN_SPEED = 0, MAX_SPEED = 10, STROKE_WEIGHT = .5, PARAM_SPEED_INC = 180;
+final float MAX_CIRCLES = 300, SPAWN_RADIUS = 300, MIN_GREY = 0, MAX_GREY = 255, MIN_SIZE = 50, MAX_SIZE = 75, MIN_SPEED = 0, MAX_SPEED = 10, STROKE_WEIGHT = 1, PARAM_SPEED_INC = 1/180f;
 
 ArrayList<Circle> circles = new ArrayList<Circle>();
 //ArrayList<float[]> lines = new ArrayList<float[]>();
@@ -10,7 +10,7 @@ String spawnMode = modes[mode];
 
 
 void setup() {
-  size(900, 900);
+  size(900, 900, P2D);
   background(255);
   strokeWeight(STROKE_WEIGHT);
 }
@@ -32,7 +32,7 @@ void draw() {
   } else if (spawnMode == "circle") {
     float x  =  (width/2) + SPAWN_RADIUS * cos(t);
     float y  =  (height/2) + SPAWN_RADIUS * sin(t);
-    t+= TWO_PI / PARAM_SPEED_INC;
+    t+= (TWO_PI * PARAM_SPEED_INC);
     circles.add(new Circle(x, y, random(MIN_SIZE, MAX_SIZE), random(MIN_SPEED, MAX_SPEED)));
   } else if (spawnMode == "mouse") {
     float x = mouseX;
