@@ -27,9 +27,33 @@ class Circle {
     this.velocity = PVector.random2D().mult(speed);
     this.radius = radius;
   }
+  
+  PVector getPosition() {
+    return this.position;
+  }
+  
+  PVector getVelocity() {
+    return this.velocity;
+  }
+  
+  float getRadius() {
+    return this.radius;
+  }
+  
+  void setPosition(PVector pos) {
+    this.position = pos;
+  }
+  
+  void setVelocity(PVector vel) {
+    this.velocity = vel;
+  }
+  
+  void setRadius(float rad) {
+    this.radius = rad;
+  }
 
   void render() {
-    circle(position.x, position.y, 2 * radius);
+    circle(this.position.x, this.position.y, 2 * radius);
   }
 
   void update() {
