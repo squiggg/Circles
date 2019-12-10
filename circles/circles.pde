@@ -1,7 +1,7 @@
-int CIRCLES = 4;
+float MAX_CIRCLES = 300, SPAWN_RADIUS = 300, MIN_GREY = 0, MAX_GREY = 255;
 
 ArrayList<Circle> circles = new ArrayList<Circle>();
-ArrayList<float[]> lines = new ArrayList<float[]>();
+//ArrayList<float[]> lines = new ArrayList<float[]>();
 
 float t = 0;
 String[] modes = new String[] {"center", "x-axis", "y-axis", "circle", "mouse", "random"};
@@ -30,9 +30,9 @@ void draw() {
     float y  =  random(height);
     circles.add(new Circle(x, y, random(50, 75), random(10)));
   } else if (spawnMode == "circle") {
-    float x  =  (width/2) + 300 * cos(t);
-    float y  =  (height/2) + 300 * sin(t);
-    t+= TWO_PI / 180;
+    float x  =  (width/2) + SPAWN_RADIUS * cos(t);
+    float y  =  (height/2) + SPAWN_RADIUS * sin(t);
+    t+= TWO_PI / 360;
     circles.add(new Circle(x, y, random(50, 75), random(10)));
   } else if (spawnMode == "mouse") {
     float x = mouseX;
@@ -44,7 +44,7 @@ void draw() {
     circles.add(new Circle(x, y, random(50, 75), random(10)));
   }
 
-  if (circles.size() > 1000)
+  if (circles.size() > MAX_CIRCLES)
     circles.remove(0);
 
   for (int i = 0; i < circles.size(); i++) {
@@ -61,9 +61,9 @@ void draw() {
     for (int j = 0; j < circles.size(); j++) {
       if (i != j) {
         if (circles.get(i).circleCollide(circles.get(j))) {
-          stroke(map(dist(circles.get(i).getPosition().x, circles.get(i).getPosition().y, circles.get(j).getPosition().x, circles.get(j).getPosition().y), 0, 150, 0, 255));
-          line(circles.get(i).getPosition().x, circles.get(i).getPosition().y, circles.get(j).position.x, circles.get(j).position.y);
-          //lines.add(new float[] {circles.get(i).getPosition().x, circles.get(i).getPosition().y, circles.get(j).position.x, circles.get(j).position.y});
+          stroke(map(dist(circles.get(i).getPosition().x, circles.get(i).getPosition().y, circles.get(j).getPosition().x, circles.get(j).getPosition().y), 0, circles.get(i).getRadius() + circles.get(j).getRadius(), MIN_GREY, MAX_GREY));
+          line(circles.get(i).getPosition().x, circles.get(i).getPosition().y, circles.get(j).getPosition().x, circles.get(j).getPosition().y);
+          //lines.add(new float[] {circles.get(i).getPosition().x, circles.get(i).getPosition().y, circles.get(j).getPosition().x, circles.get(j).getPosition().y});
           //if (lines.size() > 100) {
           //  lines.remove(0);
           //}
@@ -84,7 +84,7 @@ void draw() {
 void mousePressed() {
   if (mouseButton == LEFT) {
     mode++;
-    mode = mode % 6;
+    mode = mode % modes.length;
     spawnMode = modes[mode];
   } else if (mouseButton == RIGHT) {
     background(255);
