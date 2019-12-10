@@ -1,4 +1,4 @@
-final float MAX_CIRCLES = 300, SPAWN_RADIUS = 300, MIN_GREY = 0, MAX_GREY = 255, MIN_SIZE = 50, MAX_SIZE = 75, MIN_SPEED = 0, MAX_SPEED = 10;
+final float MAX_CIRCLES = 300, SPAWN_RADIUS = 300, MIN_GREY = 0, MAX_GREY = 255, MIN_SIZE = 50, MAX_SIZE = 75, MIN_SPEED = 0, MAX_SPEED = 10, STROKE_WEIGHT = .5;
 
 ArrayList<Circle> circles = new ArrayList<Circle>();
 //ArrayList<float[]> lines = new ArrayList<float[]>();
@@ -12,7 +12,7 @@ String spawnMode = modes[mode];
 void setup() {
   size(900, 900);
   background(255);
-  strokeWeight(.5);
+  strokeWeight(STROKE_WEIGHT);
 }
 
 void draw() {
