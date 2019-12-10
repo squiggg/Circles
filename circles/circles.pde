@@ -1,4 +1,4 @@
-float MAX_CIRCLES = 300, SPAWN_RADIUS = 300, MIN_GREY = 0, MAX_GREY = 255;
+final float MAX_CIRCLES = 300, SPAWN_RADIUS = 300, MIN_GREY = 0, MAX_GREY = 255, MIN_SIZE = 50, MAX_SIZE = 75, MIN_SPEED = 0, MAX_SPEED = 10;
 
 ArrayList<Circle> circles = new ArrayList<Circle>();
 //ArrayList<float[]> lines = new ArrayList<float[]>();
@@ -20,28 +20,28 @@ void draw() {
   if (spawnMode == "center") {
     float x  =  width/2;
     float y  =  height/2;
-    circles.add(new Circle(x, y, random(50, 75), random(10)));
+    circles.add(new Circle(x, y, random(MIN_SIZE, MAX_SIZE), random(MIN_SPEED, MAX_SPEED)));
   } else if (spawnMode == "x-axis") {
     float x  =  random(width);
     float y  =  height/2;
-    circles.add(new Circle(x, y, random(50, 75), random(10)));
+    circles.add(new Circle(x, y, random(MIN_SIZE, MAX_SIZE), random(MIN_SPEED, MAX_SPEED)));
   } else if (spawnMode == "y-axis") {
     float x  =  width/2;
     float y  =  random(height);
-    circles.add(new Circle(x, y, random(50, 75), random(10)));
+    circles.add(new Circle(x, y, random(MIN_SIZE, MAX_SIZE), random(MIN_SPEED, MAX_SPEED)));
   } else if (spawnMode == "circle") {
     float x  =  (width/2) + SPAWN_RADIUS * cos(t);
     float y  =  (height/2) + SPAWN_RADIUS * sin(t);
     t+= TWO_PI / 360;
-    circles.add(new Circle(x, y, random(50, 75), random(10)));
+    circles.add(new Circle(x, y, random(MIN_SIZE, MAX_SIZE), random(MIN_SPEED, MAX_SPEED)));
   } else if (spawnMode == "mouse") {
     float x = mouseX;
     float y = mouseY;
-    circles.add(new Circle(x, y, random(50, 75), random(10)));
+    circles.add(new Circle(x, y, random(MIN_SIZE, MAX_SIZE), random(MIN_SPEED, MAX_SPEED)));
   } else if (spawnMode == "random") {
     float x = random(width);
     float y = random(height);
-    circles.add(new Circle(x, y, random(50, 75), random(10)));
+    circles.add(new Circle(x, y, random(MIN_SIZE, MAX_SIZE), random(MIN_SPEED, MAX_SPEED)));
   }
 
   if (circles.size() > MAX_CIRCLES)
